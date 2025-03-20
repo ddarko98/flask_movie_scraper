@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+</head>
+<body>
+    <h1>Movies</h1>
+
+    <div id="movie_grid">
+        {% for movie in movies %}
+        <div class="movie-container">
+            {% if movie['poster'] == '' %}
+                <img src="/static/poster/movie_placeholder.jpeg" alt="{{ movie['title'] }} cover">
+            {% else %}
+                <img src="/static/poster/{{ movie['poster'] }}" alt="{{ movie['title'] }} cover">
+            {% endif %}
+            <h3>{{ movie['title'] }}</h3>
+            <p>Year: {{ movie['release_year'] }}</p>
+            <p>Genre: {{ movie['genre'] }}</p>
+            <p>Director: {{ movie['director'] }}</p>
+            <p>Country: {{ movie['country'] }}</p>
+            <p>Duration: {{ movie['duration'] }} min</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
