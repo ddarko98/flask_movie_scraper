@@ -5,22 +5,22 @@ import os
 
 df = pd.read_csv('movies.csv')
 
-OMDB_API_KEY = "a8c3a9e8"  # Postavi svoj OMDB API ključ
-POSTER_FOLDER = "static/poster"  # Folder za slike
+OMDB_API_KEY = "a8c3a9e8"  
+POSTER_FOLDER = "static/poster" 
 
-# Proveri da li folder za postere postoji, ako ne, kreiraj ga
+
 os.makedirs(POSTER_FOLDER, exist_ok=True)
 
 def scrape_poster(title, year):
     try:
-        # Pravimo API upit sa naslovom i godinom filma
+        
         query = title.replace(' ', '+')
         url = f'http://www.omdbapi.com/?t={query}&y={year}&apikey={OMDB_API_KEY}'
         
         response = requests.get(url)
         data = response.json()
 
-        # Ako je film pronađen i ima poster
+       
         if data.get("Response") == "True" and "Poster" in data:
             image_source = data["Poster"]
 
@@ -44,7 +44,7 @@ def scrape_poster(title, year):
         return None
 
 
-# Iteriramo kroz DataFrame i skidamo postere ako ne postoje
+
 for index, row in df.iterrows():
     title = row['title']
     release_year = row['release_year']
